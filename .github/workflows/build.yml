@@ -1,0 +1,29 @@
+name: Firmware checks
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  compile:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: PaperMonoCalendar
+      - uses: arduino/setup-arduino-cli@v2
+        with:
+          version: 1.4.1
+      - name: Test actual firmware decoder with synthetic packets
+        working-directory: PaperMonoCalendar
+        run: python3 -m unittest discover -s tests -v
+      - name: Install fixed dependencies
+        working-directory: PaperMonoCalendar
+        run: sh tools/setup.sh
+      - name: Compile PaperMono (never flash)
+        working-directory: PaperMonoCalendar
+        run: sh tools/compile.sh

@@ -1,0 +1,30 @@
+# Build products and local tools
+build/
+.build/
+.pio/
+.venv/
+__pycache__/
+*.py[cod]
+.DS_Store
+*.bin
+*.elf
+*.map
+*.log
+*.app/
+
+# Device dumps, credentials, and actual local activity are never source assets.
+backups/
+hardware_backups/
+.env
+.env.*
+*.env
+*.jsonl
+sessions/
+archived_sessions/
+activity-data/
+
+# Retain local design history, but do not publish quotes or real activity samples.
+design-demos/
+direction-approved.md
+brand-spec.md
+product-facts.md
