@@ -24,6 +24,11 @@ jobs:
       - name: Install fixed dependencies
         working-directory: PaperMonoCalendar
         run: sh tools/setup.sh
+      - name: Verify synthetic UI previews match current firmware
+        working-directory: PaperMonoCalendar
+        run: |
+          ARDUINO_USER_DIR="$(arduino-cli config get directories.user)"
+          python3 tools/render_previews.py --font-dir "$ARDUINO_USER_DIR/libraries/M5GFX/src/lgfx/Fonts" --check
       - name: Compile PaperMono (never flash)
         working-directory: PaperMonoCalendar
         run: sh tools/compile.sh
